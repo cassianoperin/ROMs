@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 
-import os, shutil, re
+import os, shutil, re, sys
+
+# Test number of arguments
+if len(sys.argv) != 2 :
+	print("Usage:\t%s ROMS_PATH\n" % (sys.argv[0]) )
+	sys.exit()
 
 # Variables
 filename = []		# list used to store the filtered roms
 filename_revision = []	# list used to keep just the last revision of the rom
-rom_path = "."		# roms path
+rom_path = sys.argv[1]		# roms path
 extension = ['zip']	# rom extension
 
 folder_USA     = "# USA/"
@@ -25,12 +30,17 @@ filter = {	# Proto Demo Alpha Beta Sample
 		'(Enhancement Chip)': folder_Other, '[BIOS]': folder_Other,		'(GameCube)': folder_Other, '(GameCube Edition)': folder_Other, '(SDK Build)': folder_Other, \
 		# Other languages
 		'(De)': folder_Other, '(Fr)': folder_Other, '(Es)': folder_Other, '(Ja)': folder_Other, \
+		# Unlicensed
+		'(Unl)': folder_Other,
 		# USA
 		'.zip': folder_USA }
 
-##################### Create folders ######################
+
+###################### Create folders ######################
 
 print("\nExecuting:\n\n1. Creating directories:")
+
+os.chdir(rom_path)
 
 for folder in folder_USA, folder_PDABS, folder_Other:
 	# Create Folders
@@ -42,7 +52,7 @@ for folder in folder_USA, folder_PDABS, folder_Other:
 	else:
 	    print ("\tSuccessfully created the directory " + '"' + "%s" % folder + '"')
 
-# ################### Filter and Move ROMs ###################
+################### Filter and Move ROMs ###################
 
 print("\n2. Filtering ROMs:\n\tProto Demo Alpha Beta Sample\n\tOther Regions\n\tUSA")
 
@@ -52,7 +62,7 @@ for key in filter:
 	filename = []
 
 	# Filter roms
-	for r,d,f in os.walk(rom_path):
+	for r,d,f in os.walk("."):
 	    for file in f:
 	       if file[-3:] in extension and key in file:
 	            filename.append(file)
@@ -91,17 +101,29 @@ for game in filename:
 	# Search for that prefix in files
 	for r,d,f in os.walk("."):
 		for file in f:
-			if game in file:
+			# if file starts with game string
+			if file.startswith(game):
 				filename_revision.append(file)
+
+		# print(filename_revision)
+
 	filename_revision = sorted(set(filename_revision))
-	# print(filename_revision)
 
 	# From all games with this prefix, keep just the most recent and move other to Old Revision folder
-	for i in range(0, len(filename_revision)):
-		# print(filename_revision[i])
-		if i > 0:
-			src = filename_revision[i]
-			dst = "../"+folder_Other+filename_revision[i]
-			shutil.move(src,dst)
+
+	# Ex.: ['Track & Field II (USA).zip', 'Track & Field II (USA) (Rev 1).zip']
+	if len(filename_revision) == 2:
+		src = filename_revision[1]
+		dst = "../"+folder_Other+filename_revision[1]
+		shutil.move(src,dst)
+
+	# Ex.: ['Untouchables, The (USA) (Rev 1).zip', 'Untouchables, The (USA) (Rev 2).zip', 'Untouchables, The (USA).zip']
+	if len(filename_revision) > 2:
+		for i in range(0, len(filename_revision)):
+			if i != len(filename_revision) -2:
+				# Move all except the last but one
+				src = filename_revision[i]
+				dst = "../"+folder_Other+filename_revision[i]
+				shutil.move(src,dst)
 
 print("\nDONE!\n")
