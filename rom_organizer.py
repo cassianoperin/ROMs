@@ -14,13 +14,16 @@ rom_path = sys.argv[1]		# roms path
 extension = ['zip']	# rom extension
 
 folder_USA     = "# USA/"
+folder_Japan   = "# Japan/"
+folder_Europe  = "# Europe/"
 folder_PDABS   = "# Proto Demo Alpha Beta Sample/"
-folder_Other   = "# Other Regions and Old Revisions/"
+folder_old     = "# Old Revisions/"
+folder_Other   = "# Other Regions/"
 
 filter = {	# Proto Demo Alpha Beta Sample
 		'(Beta': folder_PDABS, '(Proto': folder_PDABS, 'Proto)': folder_PDABS, '(Alpha': folder_PDABS, '(Demo': folder_PDABS, '(Sample': folder_PDABS, 'Sample ROM)': folder_PDABS, \
 		# Other Regions
-		'(Europe)': folder_Other, '(Japan)': folder_Other, '(France)': folder_Other, '(Germany)': folder_Other,	'(Spain)': folder_Other, '(China)': folder_Other, '(Canada)': folder_Other, \
+		'(Europe)': folder_Europe, '(Japan)': folder_Japan, '(France)': folder_Other, '(Germany)': folder_Other,	'(Spain)': folder_Other, '(China)': folder_Other, '(Canada)': folder_Other, \
 		'(Korea)': folder_Other, '(Sweden)': folder_Other, '(Hong Kong)': folder_Other, '(Australia)': folder_Other, '(Italy)': folder_Other, '(Netherlands)': folder_Other, \
 		'(Denmark)': folder_Other, '(Taiwan)': folder_Other, '(Sachen)': folder_Other, '(Russia)': folder_Other, '(Mexico)': folder_Other, '(Asia)' : folder_Other,\
 		'(USA, Asia)': folder_Other, '(Europe, Australia)': folder_Other, '(Japan, Europe)': folder_Other, '(Japan, Korea)': folder_Other, '(Argentina)': folder_Other,\
@@ -42,7 +45,7 @@ print("\nExecuting:\n\n1. Creating directories:")
 
 os.chdir(rom_path)
 
-for folder in folder_USA, folder_PDABS, folder_Other:
+for folder in folder_USA, folder_PDABS, folder_Japan, folder_Europe, folder_old, folder_Other:
 	# Create Folders
 	try:
 	    os.mkdir(folder)
@@ -114,7 +117,7 @@ for game in filename:
 	# Ex.: ['Track & Field II (USA).zip', 'Track & Field II (USA) (Rev 1).zip']
 	if len(filename_revision) == 2:
 		src = filename_revision[1]
-		dst = "../"+folder_Other+filename_revision[1]
+		dst = "../"+folder_old+filename_revision[1]
 		shutil.move(src,dst)
 
 	# Ex.: ['Untouchables, The (USA) (Rev 1).zip', 'Untouchables, The (USA) (Rev 2).zip', 'Untouchables, The (USA).zip']
@@ -123,7 +126,7 @@ for game in filename:
 			if i != len(filename_revision) -2:
 				# Move all except the last but one
 				src = filename_revision[i]
-				dst = "../"+folder_Other+filename_revision[i]
+				dst = "../"+folder_old+filename_revision[i]
 				shutil.move(src,dst)
 
 print("\nDONE!\n")
