@@ -30,7 +30,7 @@ filter = {	# Proto Demo Alpha Beta Sample
 		'(Asia, Korea)': folder_Other, '(Japan, Europe, Korea)': folder_Other, '(Europe, Korea)': folder_Other, '(Europe, Asia)': folder_Other, '(Asia, Australia)': folder_Other, \
 		# Special Releases / Bios / Enhancement Chips
 		'(Wii)': folder_Other,   '(Arcade)': folder_Other, 'Virtual Console': folder_Other, 'Switch Online': folder_Other, '(Castlevania Anniversary Collection)': folder_Other, \
-		'(Enhancement Chip)': folder_Other, '[BIOS]': folder_Other,		'(GameCube)': folder_Other, '(GameCube Edition)': folder_Other, '(SDK Build)': folder_Other, \
+		'(Enhancement Chip)': folder_Other, '[BIOS]': folder_Other, '(GameCube)': folder_Other, '(GameCube Edition)': folder_Other, '(SDK Build)': folder_Other, '(LodgeNet)': folder_Other, \
 		# Other languages
 		'(De)': folder_Other, '(Fr)': folder_Other, '(Es)': folder_Other, '(Ja)': folder_Other, \
 		# Unlicensed
