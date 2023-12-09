@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Compress individually all roms in a folder
+# for f in *; do zip -r "${f%%.*}.zip" "$f"; done
+
 import os, shutil, re, sys
 
 # Test number of arguments
