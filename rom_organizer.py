@@ -23,23 +23,48 @@ folder_PDABS   = "# Proto Demo Alpha Beta Sample/"
 folder_old     = "# Old Revisions/"
 folder_Other   = "# Other Regions/"
 
-filter = {	# Proto Demo Alpha Beta Sample
-		'(Beta': folder_PDABS, '(Proto': folder_PDABS, 'Proto)': folder_PDABS, '(Alpha': folder_PDABS, '(Demo': folder_PDABS, '(Sample': folder_PDABS, 'Sample ROM)': folder_PDABS, \
-		# Other Regions
-		'(Europe)': folder_Europe, '(Japan)': folder_Japan, '(France)': folder_Other, '(Germany)': folder_Other,	'(Spain)': folder_Other, '(China)': folder_Other, '(Canada)': folder_Other, \
-		'(Korea)': folder_Other, '(Sweden)': folder_Other, '(Hong Kong)': folder_Other, '(Australia)': folder_Other, '(Italy)': folder_Other, '(Netherlands)': folder_Other, \
-		'(Denmark)': folder_Other, '(Taiwan)': folder_Other, '(Sachen)': folder_Other, '(Russia)': folder_Other, '(Mexico)': folder_Other, '(Asia)' : folder_Other,\
-		'(USA, Asia)': folder_Other, '(Europe, Australia)': folder_Other, '(Japan, Europe)': folder_Other, '(Japan, Korea)': folder_Other, '(Argentina)': folder_Other,\
-		'(Asia, Korea)': folder_Other, '(Japan, Europe, Korea)': folder_Other, '(Europe, Korea)': folder_Other, '(Europe, Asia)': folder_Other, '(Asia, Australia)': folder_Other, \
-		# Special Releases / Bios / Enhancement Chips
-		'(Wii)': folder_Other,   '(Arcade)': folder_Other, 'Virtual Console': folder_Other, 'Switch Online': folder_Other, '(Castlevania Anniversary Collection)': folder_Other, \
-		'(Enhancement Chip)': folder_Other, '[BIOS]': folder_Other, '(GameCube)': folder_Other, '(GameCube Edition)': folder_Other, '(SDK Build)': folder_Other, '(LodgeNet)': folder_Other, \
-		# Other languages
-		'(De)': folder_Other, '(Fr)': folder_Other, '(Es)': folder_Other, '(Ja)': folder_Other, \
-		# Unlicensed
-		'(Unl)': folder_Other,
-		# USA
-		'.zip': folder_USA }
+filter = {	
+			# Proto Demo Alpha Beta Sample
+			'(Beta': folder_PDABS, '(Proto': folder_PDABS, 'Proto)': folder_PDABS, '(Alpha': folder_PDABS, '(Demo': folder_PDABS, '(Sample': folder_PDABS, 'Sample ROM)': folder_PDABS, \
+			# Special Releases / Bios / Enhancement Chips
+			'(Wii)': folder_Other,   '(Arcade)': folder_Other, 'Virtual Console': folder_Other, 'Switch Online': folder_Other, '(Castlevania Anniversary Collection)': folder_Other, \
+			'(Enhancement Chip)': folder_Other, '[BIOS]': folder_Other, '(GameCube)': folder_Other, '(GameCube Edition)': folder_Other, '(SDK Build)': folder_Other, '(LodgeNet)': folder_Other, \
+			'(Sega Channel)': folder_Other, '(Sega Smash Pack)': folder_Other, '(Steam Version)': folder_Other, \
+			# Unlicensed
+			'(Unl)': folder_Other, \
+			# Europe
+			'(Europe)': folder_Europe, '(Europe, ': folder_Europe, \
+			# Japan
+			'(Japan)': folder_Japan, '(Japan, ': folder_Japan, \
+			# USA
+			'(USA)': folder_USA, '(USA, ': folder_USA, \
+			'(World)': folder_USA, '(World, ': folder_USA, \
+			# Other Regions
+			'(Brazil)': folder_Other,  '(Brazil, ': folder_Other, \
+			'(France)': folder_Other,  '(France, ': folder_Other, \
+			'(Germany)': folder_Other, '(Germany, ': folder_Other, \
+			'(Spain)': folder_Other, '(Spain, ': folder_Other, \
+			'(China)': folder_Other, '(China, ': folder_Other, \
+			'(Canada)': folder_Other, '(Canada, ': folder_Other,\
+			'(Korea)': folder_Other, '(Korea, ': folder_Other, \
+			'(Sweden)': folder_Other, '(Sweden, ': folder_Other, \
+			'(Hong Kong)': folder_Other, '(Hong Kong, ': folder_Other, \
+			'(Australia)': folder_Other, '(Australia, ': folder_Other, \
+			'(Italy)': folder_Other, '(Italy, ': folder_Other, \
+			'(Netherlands)': folder_Other, '(Netherlands, ': folder_Other, \
+			'(Denmark)': folder_Other, '(Denmark, ': folder_Other, \
+			'(Taiwan)': folder_Other, '(Taiwan, ': folder_Other, \
+			'(Sachen)': folder_Other, '(Sachen, ': folder_Other, \
+			'(Russia)': folder_Other, '(Russia, ': folder_Other, \
+			'(Mexico)': folder_Other, '(Mexico, ': folder_Other, \
+			'(Asia)' : folder_Other, '(Asia, ': folder_Other, \
+			'(Argentina)': folder_Other, '(Argentina, ': folder_Other, \
+			# Other languages
+			'(De)': folder_Other, '(Fr)': folder_Other, '(Es)': folder_Other, '(Ja)': folder_Other
+			# Remainings
+			#'.zip': folder_USA
+		}
+
 
 
 ###################### Create folders ######################
@@ -94,7 +119,7 @@ filename = []
 for r,d,f in os.walk("."):
 	for file in f:
 		if file[-3:] in extension and '(Rev ' in file:
-			result = re.split(' \(Rev', file)
+			result = re.split(' \\(Rev', file)
 			# print(result)
 			filename.append(result[0])
 	filename = sorted(set(filename))
